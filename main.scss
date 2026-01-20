@@ -1,0 +1,321 @@
+// 언더바 붙은 파일 import 할 때는 언더바 빼고 !
+// 리셋
+@import 'reset';
+// 변수
+@import 'variables';
+// 믹스인
+@import 'mixin';
+// 헤더
+@import 'header';
+// 푸터
+@import 'footer';
+// 반응형
+@import 'responsive';
+
+// container
+.container {
+  width: 1400px;
+  margin: 0 auto;
+  // padding: 0;
+}
+
+// 버튼
+.btn {
+  @include border(all);
+  padding: $space-sm $space-lg;
+  display: inline-block;
+  background: $color-black;
+  color: $color-gray-light;
+  font-size: $font-md;
+  @include transition(all, 0.3s);
+
+  &:hover {
+    background: $color-point;
+    color: $color-white;
+  }
+}
+
+.btn.btn-outline {
+  background: $color-white;
+  color: $color-black;
+
+  &:hover {
+    background: $color-point;
+    color: $color-white;
+  }
+}
+
+@include respond(tablet) {
+  body {
+    background: yellow;
+  }
+
+  .container {
+    width: 100%;
+  }
+}
+
+@include respond(mobile) {
+  body {
+    background: blue;
+  }
+
+  .container {
+    width: 100%;
+  }
+}
+
+// 공통 section
+section {
+  padding: $space-5xl;
+  @include border(bottom);
+}
+
+.section-title {
+  @include section-title;
+}
+
+.section-header {
+  @include grid-container(1fr auto, $grid-gap-md);
+  align-items: center;
+  margin-bottom: $grid-gap-lg;
+}
+
+// visual
+.visual {
+  @include border(bottom);
+
+  .container {
+    @include grid-container(1fr 1fr, $grid-gap-lg);
+    align-items: center;
+
+    .visual-content {
+      h2 {
+        font-size: $font-headline;
+        line-height: 1.1;
+      }
+
+      p {
+        margin: $space-2xl 0;
+        color: $color-gray;
+      }
+    }
+
+    .visual-image {
+      @include border(all);
+      @include gird-center;
+      aspect-ratio: 4/3; // 비율 설정할 수 있는 css 속성
+      background: $color-bg-light;
+    }
+  }
+}
+
+// 반응형
+// 노트북
+@include respond(desktop) {
+
+  // 헤더 영역
+  header {
+    padding: $space-md;
+  }
+
+  // 비주얼을 2단에서 1단으로
+  .visual {
+    .container {
+      @include grid-container(1fr, $grid-gap-sm);
+    }
+
+    .visual-image {
+      order: 1;
+    }
+
+    .visual-content {
+      order: 2;
+    }
+  }
+}
+
+// products
+.products {
+  @include grid-container(repeat(4, 1fr), $space-md);
+
+  .product-card {
+    @include card-base;
+    @include grid-container(auto 1fr, 0);
+
+    .product-image {
+      aspect-ratio: 1;
+      @include gird-center;
+      position: relative;
+      background: $color-bg-light;
+      padding: $space-lg;
+    }
+
+    .product-info {
+      padding: $space-lg;
+      @include grid-container(1fr, $space-xs);
+      grid-template-rows: auto auto 1fr auto;
+      align-content: space-between;
+
+      .product-category {
+        font-size: $font-xs;
+        color: $color-gray-light;
+      }
+
+      .product-title {
+        font-size: $font-base;
+      }
+
+      .product-price {
+        .product-price-original {
+          text-decoration: line-through;
+          color: $color-gray-light;
+          font-weight: 400;
+          font-size: $font-base;
+        }
+      }
+    }
+  }
+}
+
+// 일부에만 적용되면 굳이 네스팅할 필요 없음
+.product-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: $color-black;
+  color: $color-white;
+  padding: 4px;
+  font-size: $font-xs;
+}
+
+// 노트북
+@include respond(desktop) {
+
+  // 4단에서 3단으로
+  .products {
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: $space-sm;
+  }
+}
+
+// 태블릿
+@include respond(tablet) {
+  .products {
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: $space-sm;
+
+    .product-card {
+      @include card-base;
+      display: inline-block;
+    }
+  }
+}
+
+// 모바일
+@include respond(mobile) {
+  .products {
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: $space-sm;
+  }
+}
+
+// categories
+.category-section {
+  background: $color-bg-light
+}
+
+.categories {
+  @include grid-container(repeat(3, 1fr), $grid-gap-md);
+
+  .category-card {
+    @include card-base;
+    padding: $grid-gap-lg;
+    @include grid-container(1fr, 0);
+    grid-template-rows: repeat(3, auto);
+    text-align: center;
+    cursor: pointer;
+
+    .category-title {
+      font-size: $font-2xl;
+    }
+
+    .category-count {
+      font-size: $font-base;
+      font-weight: 200;
+      color: $color-gray-light;
+    }
+  }
+}
+
+// 반응형
+// 노트북
+@include respond(desktop) {
+  .categories {
+    // 3단에서 2단
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+// 태블릿
+@include respond(tablet) {
+  .categories {
+    // 3단에서 2단
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+// 모바일
+@include respond(mobile) {
+  .categories {
+    // 2단에서 1단
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+// features
+.feature-grid {
+  @include grid-container(repeat(4, 1fr), 0);
+  @include border(all);
+
+  .feature-item {
+    @include border(right);
+    // background: $color-border;
+    @include gird-center;
+    padding: $space-2xl;
+
+    .feature-icon {}
+
+    .feature-title {}
+
+    .feature-desc {}
+  }
+}
+
+// 반응형
+// 노트북
+@include respond(desktop) {
+  .feature-grid {
+    grid-template-columns: repeat(2, auto);
+
+    .feature-item {
+      @include border(bottom);
+      padding: $space-xl;
+    }
+  }
+}
+
+// 태블릿
+@include respond(tablet) {}
+
+// 모바일
+@include respond(mobile) {
+  .feature-grid {
+    grid-template-columns: auto;
+
+    .feature-item {
+      @include border(bottom);
+      padding: $space-xl;
+    }
+  }
+}

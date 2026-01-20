@@ -1,0 +1,9 @@
+// 반응형
+// 노트북
+@include respond(desktop) {}
+
+// 태블릿
+@include respond(tablet) {}
+
+// 모바일
+@include respond(mobile) {}
