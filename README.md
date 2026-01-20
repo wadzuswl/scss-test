@@ -1,3 +1,8 @@
+<h2>제목</h2>
+    <ul>
+        <li>리스트</li>
+        <li>리스트</li>
+    </ul>
 <div align= "center">
     <img src="https://capsule-render.vercel.app/api?type=waving&color=0:f35858,100:6e18d8&height=120&text=scss%20test&animation=fadeIn&fontColor=000000&fontSize=70" />
     </div>
